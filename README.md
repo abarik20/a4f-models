@@ -151,7 +151,7 @@ wrangler login
 3. Publish
 
 ```bash
-wrangler pages publish ./public --project-name=your-pages-project
+wrangler pages deploy ./public --project-name=your-pages-project
 ```
 
 Note: `wrangler pages publish` expects static assets. For Next.js server features you may need to adapt build output or use a Worker target.
