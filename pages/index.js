@@ -128,6 +128,14 @@ export default function Home() {
     fontSize: '14px'
   };
 
+  // map selected tab to top-level JSON endpoint
+  const currentJsonPath = {
+    chat: '/chat',
+    audio: '/audio',
+    embed: '/embeddings',
+    images: '/image'
+  }[tab];
+
   return (
     <>
       <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%)', padding: '24px' }}>
@@ -144,27 +152,53 @@ export default function Home() {
                   Live dashboard • {lastUpdated ? `Updated ${lastUpdated.toLocaleTimeString()}` : 'Loading...'}
                 </p>
               </div>
-              <a
-                href="https://www.a4f.co/models"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '8px 16px',
-                  backgroundColor: '#2563eb',
-                  color: 'white',
-                  borderRadius: '8px',
-                  textDecoration: 'none',
-                  fontSize: '14px',
-                  fontWeight: '500',
-                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-                  transition: 'all 0.2s'
-                }}
-              >
-                🔗 View Source
-              </a>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <a
+                  href="https://www.a4f.co/models"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '8px 16px',
+                    backgroundColor: '#2563eb',
+                    color: 'white',
+                    borderRadius: '8px',
+                    textDecoration: 'none',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                    transition: 'all 0.2s'
+                  }}
+                >
+                  🔗 View Source
+                </a>
+
+                {currentJsonPath && (
+                  <a
+                    href={currentJsonPath}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 16px',
+                      backgroundColor: '#2563eb',
+                      color: 'white',
+                      borderRadius: '8px',
+                      textDecoration: 'none',
+                      fontSize: '14px',
+                      fontWeight: '500',
+                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    📄 View JSON
+                  </a>
+                )}
+              </div>
             </div>
           </div>
 
@@ -504,7 +538,7 @@ export default function Home() {
               <span style={{ display: 'inline-block', width: '4px', height: '4px', backgroundColor: '#9ca3af', borderRadius: '50%' }}></span>
               Data refreshes automatically every minute
               <span style={{ display: 'inline-block', width: '4px', height: '4px', backgroundColor: '#9ca3af', borderRadius: '50%' }}></span>
-              Powered by A4F API
+              Powered by <a href="https://devsyst.com" target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', textDecoration: 'none', fontWeight: '600' }}>DevSyst</a>
             </p>
           </div>
         </div>
