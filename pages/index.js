@@ -29,12 +29,79 @@ export default function Home() {
     async function load() {
       setLoading(true);
       try {
-        const r = await fetch('/api/models');
-        const j = await r.json();
-        setModels(j.models || []);
+        // Try local server API first (works on dev or server deployments)
+        try {
+          const r = await fetch('/api/models');
+          if (r.ok) {
+            const j = await r.json();
+            setModels(j.models || []);
+            setLastUpdated(new Date());
+            return;
+          }
+          console.warn('/api/models returned non-ok, falling back to upstream');
+        } catch (err) {
+          console.warn('Failed to fetch /api/models, falling back to upstream', err);
+        }
+
+        // Fallback: fetch upstream directly (used for static Pages deploys).
+        // NOTE: this requires the upstream API to allow CORS from your Pages domain.
+        const API_URL = 'https://www.a4f.co/api/get-display-models?plan=free';
+        const upstream = await fetch(API_URL);
+        if (!upstream.ok) {
+          console.error('Upstream API error', upstream.status);
+          setModels([]);
+          setLastUpdated(new Date());
+          return;
+        }
+        const data = await upstream.json();
+        const arr = data.models || [];
+
+        const parseLatency = (p) => {
+          try {
+            const v = p?.performance_metrics?.latency;
+            if (!v) return null;
+            const m = String(v).match(/([\d.]+)/);
+            return m ? parseFloat(m[1]) : null;
+          } catch (e) { return null; }
+        };
+
+        const processed = arr.map((m) => {
+          const providers = m.proxy_providers || [];
+          let fastest = providers[0] || null;
+          let fastestLatency = fastest ? parseLatency(fastest) : null;
+          for (const p of providers) {
+            const l = parseLatency(p);
+            if (l != null && (fastestLatency == null || l < fastestLatency)) {
+              fastest = p; fastestLatency = l;
+            }
+          }
+
+          const mergedFeatures = new Set([...(m.features || []), ...(fastest?.features || [])]);
+          const capabilities = {
+            function_calling: mergedFeatures.has('function_calling'),
+            vision: mergedFeatures.has('vision'),
+            audio: mergedFeatures.has('audio'),
+            reasoning: mergedFeatures.has('reasoning') || mergedFeatures.has('hybrid-reasoning'),
+          };
+
+          const providerId = fastest ? `${fastest.prefix}/${m.name}` : (providers[0] ? `${providers[0].prefix}/${m.name}` : `unknown/${m.name}`);
+          const uptime = fastest?.performance_metrics?.uptime_percentage ?? null;
+
+          return {
+            name: m.name,
+            providerId,
+            type: m.type,
+            capabilities,
+            context_window: m.context_window ?? null,
+            latency: fastest?.performance_metrics?.latency ?? null,
+            uptime: (uptime && uptime !== 'N/A') ? uptime : null
+          };
+        });
+
+        setModels(processed);
         setLastUpdated(new Date());
-      } catch (e) {
-        console.error(e);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }

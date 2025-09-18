@@ -1,8 +1,15 @@
 {
-  "/_app": "pages/_app.js",
+  "/admin": "pages/admin.html",
+  "/api/admin/[action]": "pages/api/admin/[action].js",
+  "/api/chat": "pages/api/chat.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.js",
+  "/_app": "pages/_app.js",
   "/api/models": "pages/api/models.js",
-  "/api/chat": "pages/api/chat.js"
+  "/api/audio": "pages/api/audio.js",
+  "/": "pages/index.html",
+  "/_document": "pages/_document.js",
+  "/category": "pages/category.html",
+  "/api/image": "pages/api/image.js",
+  "/api/embedding": "pages/api/embedding.js",
+  "/404": "pages/404.html"
 }

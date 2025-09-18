@@ -21,6 +21,7 @@ Quick links
 - DevSyst: https://devsyst.com
 - Cloudflare Pages: https://pages.cloudflare.com/
 - Cloudflare Wrangler (Workers): https://developers.cloudflare.com/workers/
+- Live demo: https://271f140a.a4f-models.pages.dev
 
 Prerequisites
 -------------
@@ -131,6 +132,12 @@ git push origin main
 ```
 
 2. In Cloudflare dashboard > Pages, create a project and connect your repo. Cloudflare will build and deploy on push.
+
+Deployed site
+-------------
+You can access the deployed site here:
+
+https://271f140a.a4f-models.pages.dev
 
 Deploy using Wrangler (alternative)
 ---------------------------------

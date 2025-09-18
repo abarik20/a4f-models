@@ -1,1 +1,109 @@
-{"version":3,"caseSensitive":false,"basePath":"","rewrites":{"beforeFiles":[],"afterFiles":[{"source":"/chat","destination":"/api/chat","regex":"^\\/chat(?:\\/)?$","check":true},{"source":"/chat/:path*","destination":"/api/chat/:path*","regex":"^\\/chat(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))?(?:\\/)?$","check":true},{"source":"/image","destination":"/api/image","regex":"^\\/image(?:\\/)?$","check":true},{"source":"/image/:path*","destination":"/api/image/:path*","regex":"^\\/image(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))?(?:\\/)?$","check":true},{"source":"/audio","destination":"/api/audio","regex":"^\\/audio(?:\\/)?$","check":true},{"source":"/audio/:path*","destination":"/api/audio/:path*","regex":"^\\/audio(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))?(?:\\/)?$","check":true},{"source":"/embeddings","destination":"/api/embedding","regex":"^\\/embeddings(?:\\/)?$","check":true},{"source":"/embeddings/:path*","destination":"/api/embedding/:path*","regex":"^\\/embeddings(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))?(?:\\/)?$","check":true}],"fallback":[]},"redirects":[{"source":"/:path+/","destination":"/:path+","permanent":true,"internal":true,"regex":"^(?:\\/((?:[^\\/]+?)(?:\\/(?:[^\\/]+?))*))\\/$"}],"headers":[]}
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [
+      {
+        "source": "/chat",
+        "destination": "/api/chat",
+        "regex": "^/chat(?:/)?$"
+      },
+      {
+        "source": "/chat/:path*",
+        "destination": "/api/chat/:path*",
+        "regex": "^/chat(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      },
+      {
+        "source": "/image",
+        "destination": "/api/image",
+        "regex": "^/image(?:/)?$"
+      },
+      {
+        "source": "/image/:path*",
+        "destination": "/api/image/:path*",
+        "regex": "^/image(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      },
+      {
+        "source": "/audio",
+        "destination": "/api/audio",
+        "regex": "^/audio(?:/)?$"
+      },
+      {
+        "source": "/audio/:path*",
+        "destination": "/api/audio/:path*",
+        "regex": "^/audio(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      },
+      {
+        "source": "/embeddings",
+        "destination": "/api/embedding",
+        "regex": "^/embeddings(?:/)?$"
+      },
+      {
+        "source": "/embeddings/:path*",
+        "destination": "/api/embedding/:path*",
+        "regex": "^/embeddings(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?(?:/)?$"
+      }
+    ],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/admin/[action]",
+      "regex": "^/api/admin/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPaction": "nxtPaction"
+      },
+      "namedRegex": "^/api/admin/(?<nxtPaction>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/category",
+      "regex": "^/category(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/category(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments"
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}
