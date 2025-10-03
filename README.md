@@ -19,15 +19,13 @@ Quick links
 - Project: (this repository)
 - Upstream source: https://www.a4f.co/models
 - DevSyst: https://devsyst.com
-- Cloudflare Pages: https://pages.cloudflare.com/
-- Cloudflare Wrangler (Workers): https://developers.cloudflare.com/workers/
-- Live demo: https://271f140a.a4f-models.pages.dev
+- Render Live Pages: https://a4f-models.onrender.com/
 
 Prerequisites
 -------------
 - Node.js 18+ (LTS recommended)
 - npm or yarn
-- A GitHub repository (Cloudflare Pages integrates with GitHub for automatic deploys)
+- A GitHub repository (render web service Pages integrates with GitHub for automatic deploys)
 
 Run locally
 ------------
@@ -137,7 +135,7 @@ Deployed site
 -------------
 You can access the deployed site here:
 
-https://271f140a.a4f-models.pages.dev
+https://a4f-models.onrender.com/
 
 Deploy using Wrangler (alternative)
 ---------------------------------
